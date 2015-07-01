@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Create";
+}
+
+<h2>添加商品</h2>
+
+@{Html.BeginForm("Add", "Product");}
+
+<label >商品名称：</label>
+@Html.TextBox("ProductName")
+<br />
+
+<label>商品价格：</label>
+@Html.TextBox("DisplayPrice")
+
+<input type="submit" value="提交"/>
+
+@{Html.EndForm();}
