@@ -50,6 +50,8 @@ namespace MyFluentBootstrap.Models
         //    entity.ProductName = "abc";
         //    entity.DisplayPrice = 0;
         //    entity.PicImgs = "abc";
+        //    entity.SuitCar = "abc";
+        //    entity.Content = "abc";
         //    entity.AddTime = DateTime.Now;
         //    entity.LastUpdateTime = DateTime.Now;
         //    entity.Insert();

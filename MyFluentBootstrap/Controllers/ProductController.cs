@@ -37,6 +37,18 @@ namespace MyFluentBootstrap.Controllers
             return View();
         }
 
+        public ActionResult Detail(int id)
+        {
+            Product p = Product.FindByProductID(id);
+            return View(p);
+        }
+        public ActionResult Edit(int id)
+        {
+            Product p = Product.FindByProductID(id);
+
+            return View(p);
+        }
+
         public ActionResult Delete(int id)
         {
             Product p = Product.FindByProductID(id);
@@ -44,14 +56,29 @@ namespace MyFluentBootstrap.Controllers
             return View("List",Product.FindAll());
         }
 
+        [ValidateInput(false)]
         public string Add(Product p)
         {
             p.AddTime = p.LastUpdateTime = DateTime.Now;
             int result = p.Save();
 
-            return result.ToString();
+            if (result > 0)
+                return "编辑成功";
+            else
+                return "编辑失败";
         }
 
-        
+
+        [ValidateInput(false)]
+        public string Update(Product p)
+        {
+            p.LastUpdateTime = DateTime.Now;
+
+            int result = p.Update();
+            if (result > 0)
+                return "编辑成功";
+            else
+                return "编辑失败";
+        }
     }
 }

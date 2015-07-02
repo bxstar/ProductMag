@@ -4,35 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>商品列表</h2>
-<hr />
-<table border="1">
-    @foreach (var item in Model)
-    {
-
-        <tr>
-            <td>
-                @Html.ActionLink("编辑", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("查看明细", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("删除", "Delete", new { id = item.ProductID })
-            </td>
-            <td>
-                @item.ProductID
-            </td>
-            <td>
-                @item.ProductName
-            </td>
-            <td>
-                @item.AddTime
-            </td>
-            <td>
-                @String.Format("{0:c2}", item.DisplayPrice)
-            </td>
-        </tr>
-    }
-</table>
-<hr />
-<div>
-    @*<a href='/Product/Create' target='_blank'>添加产品</a>*@
-    @Html.ActionLink("添加产品", "Create", null, new { target = "_blank" })
+<div class="container">
+    <h2>商品列表 <a href='/Product/List' class="btn btn-primary btn-success">刷新</a></h2>
+    <hr />
+    <table border="1" class="table table-striped">
+        <thead>
+            <tr>
+                <td>产品编号</td>
+                <td>产品名称</td>
+                <td>适用车型</td>
+                <td>录入时间</td>
+                <td>价格（元）</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ProductID
+                </td>
+                <td>
+                    @item.ProductName
+                </td>
+                <td>
+                    @item.SuitCar
+                </td>
+                <td>
+                    @item.AddTime
+                </td>
+                <td>
+                    @String.Format("{0:c2}", item.DisplayPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("编辑", "Edit", new { id = item.ProductID }, new { target = "_blank" }) |
+                    @Html.ActionLink("查看明细", "Detail", new { id = item.ProductID }, new { target = "_blank" }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.ProductID }, new { target = "_blank" })
+                </td>
+            </tr>
+        }
+    </table>
+    <hr />
+    <div>
+        <a href='/Product/Create' class="btn btn-primary" target="_blank">添加产品</a>
+    </div>
 </div>

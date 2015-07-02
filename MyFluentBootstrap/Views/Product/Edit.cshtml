@@ -1,12 +1,10 @@
 ﻿@{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
+<h2>编辑产品</h2>
 
-
-<h2>添加产品</h2>
-
-@{Html.BeginForm("Add", "Product");}
+@{Html.BeginForm("Update", "Product");}
 
 产品名称：
 @Html.TextBox("ProductName")
@@ -23,15 +21,19 @@
 产品详情：
 @Html.TextArea("content", new { style = "width:750px;height:400px" })
 
-<input type="submit" value="提交"/>
+
+@Html.Hidden("ProductID")
+@Html.Hidden("AddTime")
+
+<input type="submit" value="提交" />
 
 @{Html.EndForm();}
 
 
 @section js{
-<script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
-<script type="text/javascript">
+    <script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
+    <script type="text/javascript">
             var editor;
             KindEditor.ready(function (K) {
                 editor = K.create('textarea[name="content"]', {
@@ -42,5 +44,5 @@
 
                 });
             });
-</script>
+    </script>
 }

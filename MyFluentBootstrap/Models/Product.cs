@@ -57,12 +57,36 @@ namespace MyFluentBootstrap.Models
         /// <summary></summary>
         [DisplayName("PicImgs")]
         [Description("")]
-        [DataObjectField(false, false, true, 100)]
-        [BindColumn(4, "PicImgs", "", null, "varchar(100)", 0, 0, false)]
+        [DataObjectField(false, false, true, 2147483647)]
+        [BindColumn(4, "PicImgs", "", null, "varchar(2147483647)", 100, 0, false)]
         public virtual String PicImgs
         {
             get { return _PicImgs; }
             set { if (OnPropertyChanging(__.PicImgs, value)) { _PicImgs = value; OnPropertyChanged(__.PicImgs); } }
+        }
+
+        private String _SuitCar;
+        /// <summary></summary>
+        [DisplayName("SuitCar")]
+        [Description("")]
+        [DataObjectField(false, false, true, 50)]
+        [BindColumn(5, "SuitCar", "", null, "nvarchar(50)", 0, 0, true)]
+        public virtual String SuitCar
+        {
+            get { return _SuitCar; }
+            set { if (OnPropertyChanging(__.SuitCar, value)) { _SuitCar = value; OnPropertyChanged(__.SuitCar); } }
+        }
+
+        private String _Content;
+        /// <summary></summary>
+        [DisplayName("Content")]
+        [Description("")]
+        [DataObjectField(false, false, true, 4000)]
+        [BindColumn(6, "Content", "", null, "nvarchar(4000)", 0, 0, true)]
+        public virtual String Content
+        {
+            get { return _Content; }
+            set { if (OnPropertyChanging(__.Content, value)) { _Content = value; OnPropertyChanged(__.Content); } }
         }
 
         private DateTime _AddTime;
@@ -70,7 +94,7 @@ namespace MyFluentBootstrap.Models
         [DisplayName("AddTime")]
         [Description("")]
         [DataObjectField(false, false, true, 8)]
-        [BindColumn(5, "AddTime", "", null, "datetime", 0, 0, false)]
+        [BindColumn(7, "AddTime", "", null, "datetime", 0, 0, false)]
         public virtual DateTime AddTime
         {
             get { return _AddTime; }
@@ -82,7 +106,7 @@ namespace MyFluentBootstrap.Models
         [DisplayName("LastUpdateTime")]
         [Description("")]
         [DataObjectField(false, false, true, 8)]
-        [BindColumn(6, "LastUpdateTime", "", null, "datetime", 0, 0, false)]
+        [BindColumn(8, "LastUpdateTime", "", null, "datetime", 0, 0, false)]
         public virtual DateTime LastUpdateTime
         {
             get { return _LastUpdateTime; }
@@ -108,6 +132,8 @@ namespace MyFluentBootstrap.Models
                     case __.ProductName : return _ProductName;
                     case __.DisplayPrice : return _DisplayPrice;
                     case __.PicImgs : return _PicImgs;
+                    case __.SuitCar : return _SuitCar;
+                    case __.Content : return _Content;
                     case __.AddTime : return _AddTime;
                     case __.LastUpdateTime : return _LastUpdateTime;
                     default: return base[name];
@@ -121,6 +147,8 @@ namespace MyFluentBootstrap.Models
                     case __.ProductName : _ProductName = Convert.ToString(value); break;
                     case __.DisplayPrice : _DisplayPrice = Convert.ToDouble(value); break;
                     case __.PicImgs : _PicImgs = Convert.ToString(value); break;
+                    case __.SuitCar : _SuitCar = Convert.ToString(value); break;
+                    case __.Content : _Content = Convert.ToString(value); break;
                     case __.AddTime : _AddTime = Convert.ToDateTime(value); break;
                     case __.LastUpdateTime : _LastUpdateTime = Convert.ToDateTime(value); break;
                     default: base[name] = value; break;
@@ -144,6 +172,12 @@ namespace MyFluentBootstrap.Models
 
             ///<summary></summary>
             public static readonly Field PicImgs = FindByName(__.PicImgs);
+
+            ///<summary></summary>
+            public static readonly Field SuitCar = FindByName(__.SuitCar);
+
+            ///<summary></summary>
+            public static readonly Field Content = FindByName(__.Content);
 
             ///<summary></summary>
             public static readonly Field AddTime = FindByName(__.AddTime);
@@ -170,6 +204,12 @@ namespace MyFluentBootstrap.Models
             public const String PicImgs = "PicImgs";
 
             ///<summary></summary>
+            public const String SuitCar = "SuitCar";
+
+            ///<summary></summary>
+            public const String Content = "Content";
+
+            ///<summary></summary>
             public const String AddTime = "AddTime";
 
             ///<summary></summary>
@@ -194,6 +234,12 @@ namespace MyFluentBootstrap.Models
 
         /// <summary></summary>
         String PicImgs { get; set; }
+
+        /// <summary></summary>
+        String SuitCar { get; set; }
+
+        /// <summary></summary>
+        String Content { get; set; }
 
         /// <summary></summary>
         DateTime AddTime { get; set; }
