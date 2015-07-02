@@ -2,6 +2,8 @@
     ViewBag.Title = "Create";
 }
 
+
+
 <h2>添加商品</h2>
 
 @{Html.BeginForm("Add", "Product");}
@@ -13,6 +15,28 @@
 <label>商品价格：</label>
 @Html.TextBox("DisplayPrice")
 
+<br />
+<label>商品详情：</label>
+@Html.TextArea("content", new { style = "width:750px;height:400px" })
+
 <input type="submit" value="提交"/>
 
 @{Html.EndForm();}
+
+
+@section js{
+<script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
+<script type="text/javascript">
+            var editor;
+            KindEditor.ready(function (K) {
+                editor = K.create('textarea[name="content"]', {
+                    resizeType: 1,
+                    allowFileManager : true,
+                    uploadJson: '@Url.Content("~/Kindeditor/Upload.ashx")',
+                    fileManagerJson:'@Url.Content("~/Kindeditor/FileManager.ashx")'
+
+                });
+            });
+</script>
+}
