@@ -1,14 +1,16 @@
 ﻿@{
     @model MyFluentBootstrap.Models.Product
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "产品详情";
 }
 
 <h2>详情</h2>
-商品编号：@Model.ProductID
+产品编号：@Model.ProductID
 <br />
-商品名称：@Model.ProductName
+产品名称：@Model.ProductName
 <br />
-商品价格：@Model.DisplayPrice
+使用车型：@Model.SuitCar
+<br />
+产品价格：@Model.DisplayPrice
 <br />
 上架时间：@Model.AddTime.ToString("yyyy-MM-dd")
 <br />

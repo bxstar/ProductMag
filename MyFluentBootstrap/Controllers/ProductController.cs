@@ -21,15 +21,27 @@ namespace MyFluentBootstrap.Controllers
             EntityList<Product> lstProduct = Product.FindAll();
             foreach (var item in lstProduct)
             {
-                sb.AppendFormat("商品ID:{0},商品名称:{1},商品价格:{2},图片:{3}<br>", item.ProductID, item.ProductName, item.DisplayPrice, item.PicImgs);
+                sb.AppendFormat("产品ID:{0},产品名称:{1},产品价格:{2},图片:{3}<br>", item.ProductID, item.ProductName, item.DisplayPrice, item.PicImgs);
             }
             sb.AppendFormat("<a href='/Product/Create' target='_blank' >新建</a>");
             return sb.ToString();
         }
 
-        public ActionResult List()
+        public ActionResult List(string searchkey, string index)
         {
-            return View(Product.FindAll());
+            if (string.IsNullOrEmpty(index))
+                index = "1";
+            if (string.IsNullOrEmpty(searchkey))
+                searchkey = string.Empty;
+            string strSearchKey = searchkey.ToLower();
+            List<Product> totalList = Product.FindAll().ToList().Where(p => p.ProductName.Contains(strSearchKey) || p.SuitCar.Contains(strSearchKey)).ToList();
+            BasePageModel page = new BasePageModel() { SearchKeyWord = searchkey, CurrentIndex = Int32.Parse(index), TotalCount = totalList.Count };
+
+            List<Product> pageList = totalList.Skip((page.CurrentIndex - 1) * page.PageSize).Take(page.PageSize).ToList();
+            ViewData["pagemodel"] = page;
+            return View(pageList);
+
+            //return View(Product.FindAll());
         }
 
         public ActionResult Create()
