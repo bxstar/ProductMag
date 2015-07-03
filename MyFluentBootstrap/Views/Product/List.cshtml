@@ -5,55 +5,18 @@
 }
 
 <div class="container">
-    <h2>产品列表 <a href='/Product/List' class="btn btn-primary btn-success">刷新</a></h2>
+    <h2>
+        产品列表 
+        <span class="pull-right">
+            <a href='/Product/List' class="btn btn-primary btn-success">刷新</a>
+            <a href='/Product/Create' class="btn btn-primary" target="_blank">添加产品</a>
+        </span>
+    </h2>
     <hr />
-    <table border="1" class="table table-striped">
-        <thead>
-            <tr>
-                <td>产品编号</td>
-                <td>产品名称</td>
-                <td>适用车型</td>
-                <td>录入时间</td>
-                <td>价格（元）</td>
-                <td>操作</td>
-            </tr>
-        </thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.ProductID
-                </td>
-                <td>
-                    @item.ProductName
-                </td>
-                <td>
-                    @item.SuitCar
-                </td>
-                <td>
-                    @item.AddTime
-                </td>
-                <td>
-                    @String.Format("{0:c2}", item.DisplayPrice)
-                </td>
-                <td>
-                    @Html.ActionLink("编辑", "Edit", new { id = item.ProductID }, new { target = "_blank" }) |
-                    @Html.ActionLink("查看明细", "Detail", new { id = item.ProductID }, new { target = "_blank" }) |
-                    @Html.ActionLink("删除", "Delete", new { id = item.ProductID }, new { target = "_blank" })
-                </td>
-            </tr>
-        }
-    </table>
-    <hr />
-    <div>
-        <a href='/Product/Create' class="btn btn-primary" target="_blank">添加产品</a>
-    </div>
-
-
-
-    <form class="navbar-form navbar-right" name="searchform" action="@Url.Action("List", new {index="1" }) method=" post">
+    <form class="navbar-form navbar-right" name="searchform" action="@Url.Action("List", new {index="1" })" method="post">
         <div class="input-group">
-            <input type="text" id="searchkey" name="searchkey" class="form-control" placeholder="Search..." />
+
+            <input type="text" id="searchkey" name="searchkey" class="form-control" placeholder="产品名称/适用车型..." value="@ViewBag.SearchKey" />
             <span class="btn input-group-addon" onclick="document.searchform.submit();">
                 <span class="glyphicon  glyphicon-search"></span>
             </span>
@@ -62,21 +25,44 @@
     <table class="table  table-hover table-bordered  table-condensed">
         <thead>
             <tr>
+                <th>编号</th>
                 <th>产品名称</th>
                 <th>适用车型</th>
+                <th>录入时间</th>
+                <th>价格（元）</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.SuitCar</td>
+                    <td>
+                        @item.ProductID
+                    </td>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.SuitCar
+                    </td>
+                    <td>
+                        @item.AddTime
+                    </td>
+                    <td>
+                        @String.Format("{0:c2}", item.DisplayPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("编辑", "Edit", new { id = item.ProductID }, new { target = "_blank" }) |
+                        @Html.ActionLink("查看明细", "Detail", new { id = item.ProductID }, new { target = "_blank" }) |
+                        @Html.ActionLink("删除", "Delete", new { id = item.ProductID }, new { target = "_blank" })
+                    </td>
                 </tr>
             }
 
         </tbody>
     </table>
     @Html.Partial("MvcPagerView", ViewData["pagemodel"])
+    <hr />
 
 </div>

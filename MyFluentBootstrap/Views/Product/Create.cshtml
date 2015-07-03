@@ -3,30 +3,37 @@
 }
 
 
+<div class="container">
+    <h2>添加产品</h2>
 
-<h2>添加产品</h2>
+    @{Html.BeginForm("Add", "Product");}
 
-@{Html.BeginForm("Add", "Product");}
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">产品名称</span>
+        <input type="text" class="form-control" name="ProductName" aria-describedby="sizing-addon1">
+    </div>
 
-产品名称：
-@Html.TextBox("ProductName")
-<br />
+    <br />
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">适合车型</span>
+        <input type="text" class="form-control" name="SuitCar" aria-describedby="sizing-addon1">
+    </div>
+    <br />
 
-适合车型：
-@Html.TextBox("SuitCar")
-<br />
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">产品价格(元)</span>
+        <input type="number" class="form-control" name="DisplayPrice" aria-describedby="sizing-addon1">
+    </div>
 
-产品价格：
-@Html.TextBox("DisplayPrice")
+    <br />
+    <span class="h4">产品详情</span>
+    @Html.TextArea("content", new { style = "width:900px;height:500px" })
+    <br />
+    <input type="submit" value="提交" class="btn btn-primary"/>
 
-<br />
-产品详情：
-@Html.TextArea("content", new { style = "width:750px;height:400px" })
+    @{Html.EndForm();}
 
-<input type="submit" value="提交"/>
-
-@{Html.EndForm();}
-
+</div>
 
 @section js{
 <script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>

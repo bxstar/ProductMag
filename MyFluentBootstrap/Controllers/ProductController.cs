@@ -33,12 +33,21 @@ namespace MyFluentBootstrap.Controllers
                 index = "1";
             if (string.IsNullOrEmpty(searchkey))
                 searchkey = string.Empty;
-            string strSearchKey = searchkey.ToLower();
-            List<Product> totalList = Product.FindAll().ToList().Where(p => p.ProductName.Contains(strSearchKey) || p.SuitCar.Contains(strSearchKey)).ToList();
-            BasePageModel page = new BasePageModel() { SearchKeyWord = searchkey, CurrentIndex = Int32.Parse(index), TotalCount = totalList.Count };
+            else
+                searchkey = searchkey.ToLower();
+
+            List<Product> lstProduct = Product.FindAll().ToList();
+
+            List<Product> totalList = lstProduct.Where(p =>
+                p.ProductName.Contains(searchkey)
+                || (p.SuitCar != null && p.SuitCar.Contains(searchkey))
+                ).ToList();
+
+            BasePageModel page = new BasePageModel("List") { SearchKeyWord = searchkey, CurrentIndex = Int32.Parse(index), TotalCount = totalList.Count };
 
             List<Product> pageList = totalList.Skip((page.CurrentIndex - 1) * page.PageSize).Take(page.PageSize).ToList();
             ViewData["pagemodel"] = page;
+            ViewBag.SearchKey = searchkey;
             return View(pageList);
 
             //return View(Product.FindAll());

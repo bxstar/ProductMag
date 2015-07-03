@@ -13,15 +13,18 @@ namespace MyFluentBootstrap.Models
         public string SearchKeyWord { get; set; }
 
         /// <summary>
+        /// 构造函数，指定分页ActionName
+        /// </summary>
+        /// <param name="actionName">点击分页是指向 Action 的名字</param>
+        public BasePageModel(string actionName)
+        {
+            ActionName = actionName;
+        }
+
+        /// <summary>
         ///点击分页是指向 Action 的名字 根据具体需要而定
         /// </summary>
-        public virtual string ActionName
-        {
-            get
-            {
-                return "Index";
-            }
-        }
+        public string ActionName { get; set; }
 
         public int TotalCount { get; set; }
 
@@ -40,7 +43,7 @@ namespace MyFluentBootstrap.Models
         /// </summary>
         public virtual int PageSize
         {
-            get { return 10; }
+            get { return 20; }
         }
 
         /// <summary>

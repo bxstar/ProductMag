@@ -2,33 +2,42 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>编辑产品</h2>
+<div class="container">
+    <h2>编辑产品</h2>
 
-@{Html.BeginForm("Update", "Product");}
+    @{Html.BeginForm("Update", "Product");}
 
-产品名称：
-@Html.TextBox("ProductName")
-<br />
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">产品名称</span>
+        @Html.TextBox("ProductName", null, new { @class = "form-control" })
+    </div>
+    <br />
 
-适合车型：
-@Html.TextBox("SuitCar")
-<br />
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">适合车型</span>
+        @Html.TextBox("SuitCar", null, new { @class = "form-control" })
+    </div>
+    <br />
 
-产品价格：
-@Html.TextBox("DisplayPrice")
+    <div class="input-group input-group-lg col-lg-6">
+        <span class="input-group-addon" id="sizing-addon1">产品价格(元)</span>
+        @Html.TextBox("DisplayPrice", null, new { @class = "form-control", type = "number" })
+    </div>
 
-<br />
-产品详情：
-@Html.TextArea("content", new { style = "width:750px;height:400px" })
+    <br />
+    <span class="h4">产品详情</span>
+    @Html.TextArea("content", new { style = "width:900px;height:500px" })
 
 
-@Html.Hidden("ProductID")
-@Html.Hidden("AddTime")
+    @Html.Hidden("ProductID")
+    @Html.Hidden("AddTime")
 
-<input type="submit" value="提交" />
+    <br />
+    <input type="submit" value="提交" class="btn btn-primary" />
 
-@{Html.EndForm();}
+    @{Html.EndForm();}
 
+</div>
 
 @section js{
     <script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
