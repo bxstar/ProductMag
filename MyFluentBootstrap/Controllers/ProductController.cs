@@ -53,6 +53,15 @@ namespace MyFluentBootstrap.Controllers
             //return View(Product.FindAll());
         }
 
+        /// <summary>
+        /// 提供OData数据服务，参考：http://volaresystems.com/blog/post/2013/02/19/Using-Kendo-UI-grid-with-Web-API-and-OData
+        /// </summary>
+        public ActionResult MobileList(string searchKey)
+        {
+
+            return View();
+        }
+
         public ActionResult Create()
         {
             return View();
