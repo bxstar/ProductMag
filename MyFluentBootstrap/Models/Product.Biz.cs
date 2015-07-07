@@ -48,9 +48,14 @@ namespace MyFluentBootstrap.Models
 
         //    var entity = new Product();
         //    entity.ProductName = "abc";
-        //    entity.DisplayPrice = 0;
+        //    entity.ProductType = "abc";
         //    entity.PicImgs = "abc";
         //    entity.SuitCar = "abc";
+        //    entity.CarXingHao = "abc";
+        //    entity.PaiLiang = "abc";
+        //    entity.FactoryYear = "abc";
+        //    entity.DisplayPrice = 0;
+        //    entity.Stock = 0;
         //    entity.Content = "abc";
         //    entity.AddTime = DateTime.Now;
         //    entity.LastUpdateTime = DateTime.Now;
@@ -79,8 +84,8 @@ namespace MyFluentBootstrap.Models
         #endregion
 
         #region 扩展查询﻿
-        /// <summary>根据ProductID查找</summary>
-        /// <param name="productid"></param>
+        /// <summary>根据编号，主键查找</summary>
+        /// <param name="productid">编号，主键</param>
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public static Product FindByProductID(Int32 productid)

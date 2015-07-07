@@ -9,6 +9,9 @@ using XCode;
 
 namespace MyFluentBootstrap.Controllers
 {
+    /// <summary>
+    /// 产品控制器，数据类型参考：http://www.chebao360.com/goods/index.php?cate=23&sort=24&brands=103&models=1171&outputs=3198&isnews=0&years=2012
+    /// </summary>
     public class ProductController : Controller
     {
         //
