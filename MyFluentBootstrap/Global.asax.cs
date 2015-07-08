@@ -17,8 +17,10 @@ namespace MyFluentBootstrap
         {
             AreaRegistration.RegisterAllAreas();
 
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            
 
             string strProductConn = System.Configuration.ConfigurationManager.AppSettings["product_conn"];
             DAL.AddConnStr("product_conn", strProductConn, null, "Sqlite");

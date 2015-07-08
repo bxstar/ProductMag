@@ -29,39 +29,40 @@
     <script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
         <img src="../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="km-thumbnail" />
         <h4>#:ProductName#</h4>
-        <p>#:kendo.toString(UnitPrice, "c")#</p>
+        <p>#:kendo.toString(DisplayPrice, "c")#</p>
     </script>
 
     <script>
-        //kendo.data.DataSource数据源使用介绍，http://docs.telerik.com/kendo-ui/api/javascript/data/datasource
-    function mobileListViewFiltering() {
-        var dataSource = new kendo.data.DataSource({
-            type: "odata",
-            transport: {
-                read: {
-                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
-                }
-            },
-            sort: {
-                field: "ProductName",
-                dir: "desc"
-            },
-            serverPaging: true,
-            serverFiltering: true,
-            serverSorting: true,
-            pageSize: 50
-        });
+        //kendo.data.DataSource数据源使用介绍，http://docs.telerik.com/kendo-ui/api/javascript/data/datasource,
+        function mobileListViewFiltering() {
+            var dataSource = new kendo.data.DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "/odata/Products",
+                        dataType: "json"          //不使用json将发送$callback参数，产生jquery回调函数，http://www.telerik.com/blogs/using_kendo_ui_with_mvc4_webapi_odata_and_ef
+                    }
+                },
+                sort: {
+                    field: "ProductName",
+                    dir: "desc"
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true,
+                pageSize: 50
+            });
 
-        $("#filterable-listview").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#mobile-listview-filtering-template").text(),
-            filterable: {
-                field: "ProductName",
-                operator: "startswith"
-            },
-            endlessScroll: true
-        });
-    }
+            $("#filterable-listview").kendoMobileListView({
+                dataSource: dataSource,
+                template: $("#mobile-listview-filtering-template").text(),
+                filterable: {
+                    field: "ProductName",
+                    operator: "startswith"
+                },
+                endlessScroll: true
+            });
+        }
     </script>
 
     <style>
@@ -73,7 +74,7 @@
 
 
     <script>
-    var app = new kendo.mobile.Application(document.body);
+        var app = new kendo.mobile.Application(document.body);
     </script>
 </body>
 </html>
