@@ -1,5 +1,8 @@
 ﻿@{
     ViewBag.Title = "Create";
+    Dictionary<string, string> dicProductType = new Dictionary<string, string>();
+    dicProductType.Add("前刹车片", "前刹车片");
+    dicProductType.Add("后刹车片", "后刹车片");
 }
 
 
@@ -8,21 +11,36 @@
 
     @{Html.BeginForm("Add", "Product");}
 
-    <div class="input-group input-group-lg col-lg-6">
+    <div class="input-group input-group-lg col-lg-10">
         <span class="input-group-addon" id="sizing-addon1">产品名称</span>
         <input type="text" class="form-control" name="ProductName" aria-describedby="sizing-addon1">
+
+        <span class="input-group-addon">刹车片类型</span>
+        @Html.Bootstrap().Select("ProductType", null, dicProductType)
     </div>
 
     <br />
-    <div class="input-group input-group-lg col-lg-6">
+    <div class="input-group input-group-lg col-lg-10">
         <span class="input-group-addon" id="sizing-addon1">适合车型</span>
         <input type="text" class="form-control" name="SuitCar" aria-describedby="sizing-addon1">
+
+        <span class="input-group-addon">型号</span>
+        @Html.TextBox("CarXingHao", null, new { @class = "form-control" })
+
+        <span class="input-group-addon">排量</span>
+        @Html.TextBox("PaiLiang", null, new { @class = "form-control", type = "number", step = "0.1" })
+
+        <span class="input-group-addon">出厂年份</span>
+        @Html.TextBox("FactoryYear", null, new { @class = "form-control", type = "number" })
     </div>
     <br />
 
-    <div class="input-group input-group-lg col-lg-6">
+    <div class="input-group input-group-lg col-lg-10">
         <span class="input-group-addon" id="sizing-addon1">产品价格(元)</span>
         <input type="number" class="form-control" name="DisplayPrice" aria-describedby="sizing-addon1">
+
+        <span class="input-group-addon">库存</span>
+        @Html.TextBox("Stock", null, new { @class = "form-control", type = "number" })
     </div>
 
     <br />

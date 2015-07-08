@@ -28,8 +28,13 @@
                 <th>编号</th>
                 <th>产品名称</th>
                 <th>适用车型</th>
-                <th>录入时间</th>
+                <th>型号</th>
+                <th>排量</th>
+                <th>出厂年份</th>
+                <th>刹车片类型</th>
                 <th>价格（元）</th>
+                <th>库存</th>
+                <th>录入时间</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -47,10 +52,25 @@
                         @item.SuitCar
                     </td>
                     <td>
-                        @item.AddTime
+                        @item.CarXingHao
+                    </td>
+                    <td>
+                        @item.PaiLiang
+                    </td>
+                    <td>
+                        @item.FactoryYear
+                    </td>
+                    <td>
+                        @item.ProductType
                     </td>
                     <td>
                         @String.Format("{0:c2}", item.DisplayPrice)
+                    </td>
+                    <td>
+                        @item.Stock
+                    </td>
+                    <td>
+                        @item.AddTime
                     </td>
                     <td>
                         @Html.ActionLink("编辑", "Edit", new { id = item.ProductID }, new { target = "_blank" }) |

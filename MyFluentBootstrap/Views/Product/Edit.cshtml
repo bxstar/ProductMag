@@ -1,5 +1,9 @@
 ﻿@{
+    @model MyFluentBootstrap.Models.Product
     ViewBag.Title = "Edit";
+    Dictionary<string, string> dic = new Dictionary<string, string>();
+    dic.Add("前刹车片", "前刹车片");
+    dic.Add("后刹车片", "后刹车片");
 }
 
 <div class="container">
@@ -7,21 +11,38 @@
 
     @{Html.BeginForm("Update", "Product");}
 
-    <div class="input-group input-group-lg col-lg-6">
-        <span class="input-group-addon" id="sizing-addon1">产品名称</span>
+    <div class="input-group input-group-lg col-lg-10">
+        <span class="input-group-addon">产品名称</span>
         @Html.TextBox("ProductName", null, new { @class = "form-control" })
+
+        <span class="input-group-addon">刹车片类型</span>
+        @Html.Bootstrap().Select("ProductType", null, dic)
     </div>
     <br />
 
-    <div class="input-group input-group-lg col-lg-6">
-        <span class="input-group-addon" id="sizing-addon1">适合车型</span>
+    <div class="input-group input-group-lg col-lg-10">
+
+        <span class="input-group-addon">适合车型</span>
         @Html.TextBox("SuitCar", null, new { @class = "form-control" })
+
+        <span class="input-group-addon">型号</span>
+        @Html.TextBox("CarXingHao", null, new { @class = "form-control" })
+
+        <span class="input-group-addon">排量</span>
+        @Html.TextBox("PaiLiang", null, new { @class = "form-control", type = "number", step = "0.1" })
+
+        <span class="input-group-addon">出厂年份</span>
+        @Html.TextBox("FactoryYear", null, new { @class = "form-control", type = "number" })
+
     </div>
     <br />
 
-    <div class="input-group input-group-lg col-lg-6">
-        <span class="input-group-addon" id="sizing-addon1">产品价格(元)</span>
+    <div class="input-group input-group-lg col-lg-10">
+        <span class="input-group-addon">产品价格(元)</span>
         @Html.TextBox("DisplayPrice", null, new { @class = "form-control", type = "number" })
+
+        <span class="input-group-addon">库存</span>
+        @Html.TextBox("Stock", null, new { @class = "form-control", type = "number" })
     </div>
 
     <br />
@@ -33,25 +54,41 @@
     @Html.Hidden("AddTime")
 
     <br />
-    <input type="submit" value="提交" class="btn btn-primary" />
+    <input type="submit" onclick="aa();" value="提交" class="btn btn-primary" />
 
     @{Html.EndForm();}
 
+    @*一行两列写法*@
+    @*<div class="form-group">
+            <label for="starttime" class="col-sm-2 control-label">实际开始时间</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" id="starttime" readonly="readonly" onchange="checkNull(this,'submitButton')" />
+            </div>
+            <label for="endtime" class="col-sm-2 control-label">实际结束时间</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" id="endtime" readonly="readonly" onchange="checkNull(this,'submitButton')" />
+            </div>
+        </div>*@
 </div>
 
 @section js{
     <script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
     <script type="text/javascript">
-            var editor;
-            KindEditor.ready(function (K) {
-                editor = K.create('textarea[name="content"]', {
-                    resizeType: 1,
-                    allowFileManager : true,
-                    uploadJson: '@Url.Content("~/Kindeditor/Upload.ashx")',
-                    fileManagerJson:'@Url.Content("~/Kindeditor/FileManager.ashx")'
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType: 1,
+                allowFileManager: true,
+                uploadJson: '@Url.Content("~/Kindeditor/Upload.ashx")',
+                fileManagerJson: '@Url.Content("~/Kindeditor/FileManager.ashx")'
 
-                });
             });
+        });
+
+        $(document).ready(function () {
+            $('select[name=ProductType]').val("@Model.ProductType");
+        });
+
     </script>
 }
