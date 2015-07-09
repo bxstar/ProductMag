@@ -59,30 +59,41 @@ namespace MyFluentBootstrap.Controllers
         /// <summary>
         /// 提供给手机端查询
         /// </summary>
-        public ActionResult ListForMobile(string SuitCar, string ProductName, string index)
+        /// <param name="ProductType">产品类型，前刹车片，后刹车片等</param>
+        /// <param name="SuitCar">适用车型</param>
+        /// <param name="ProductName">产品名称</param>
+        /// <param name="index">页索引号</param>
+        /// <returns>产品列表</returns>
+        public ActionResult ListForMobile(string ProductType, string SuitCar, string ProductName, string index)
         {
             if (string.IsNullOrEmpty(index))
                 index = "1";
             Dictionary<string, object> dicSearchCondition = new Dictionary<string, object>();
+            if (!string.IsNullOrEmpty(ProductType))
+            {
+                dicSearchCondition.Add("ProductType", ProductType);
+            }
             if (!string.IsNullOrEmpty(SuitCar))
             {
                 dicSearchCondition.Add("SuitCar", SuitCar);
             }
+            //模糊查询，使用linq
             if (ProductName == null)
             {
                 ProductName = string.Empty;
             }
-            List<Product> lstProduct = Product.FindAll(dicSearchCondition.Select(o => o.Key).ToArray(), dicSearchCondition.Select(o => o.Value).ToArray()).Where<Product>(x => x.ProductName.Contains(ProductName)).ToList();
-                //.ToList().Where(x => x.ProductName.Contains(ProductName)).ToList();
+            List<Product> lstProduct = Product.FindAll(dicSearchCondition.Select(o => o.Key).ToArray(), dicSearchCondition.Select(o => o.Value).ToArray())
+                .Where<Product>(x => x.ProductName.Contains(ProductName)).ToList();
 
+            //分页使用
+            //BasePageModel page = new BasePageModel("List") { SearchKeyWord = ProductName, CurrentIndex = Int32.Parse(index), TotalCount = lstProduct.Count };
+            //List<Product> pageList = lstProduct.Skip((page.CurrentIndex - 1) * page.PageSize).Take(page.PageSize).ToList();
+            //ViewData["pagemodel"] = page;
 
-            BasePageModel page = new BasePageModel("List") { SearchKeyWord = ProductName, CurrentIndex = Int32.Parse(index), TotalCount = lstProduct.Count };
-
-            List<Product> pageList = lstProduct.Skip((page.CurrentIndex - 1) * page.PageSize).Take(page.PageSize).ToList();
-            ViewData["pagemodel"] = page;
             ViewBag.SuitCar = SuitCar;
+            ViewBag.ProductType = ProductType;
             ViewBag.ProductName = ProductName;
-            return View(pageList);
+            return View(lstProduct);
         }
 
         /// <summary>

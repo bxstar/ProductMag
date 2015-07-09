@@ -1,9 +1,9 @@
 ﻿@{
     @model MyFluentBootstrap.Models.Product
-    ViewBag.Title = "Edit";
-    Dictionary<string, string> dic = new Dictionary<string, string>();
-    dic.Add("前刹车片", "前刹车片");
-    dic.Add("后刹车片", "后刹车片");
+    ViewBag.Title = "产品编辑";
+    Dictionary<string, string> dicProductType = new Dictionary<string, string>();
+    dicProductType.Add("前刹车片", "前刹车片");
+    dicProductType.Add("后刹车片", "后刹车片");
 }
 
 <div class="container">
@@ -16,7 +16,7 @@
         @Html.TextBox("ProductName", null, new { @class = "form-control" })
 
         <span class="input-group-addon">刹车片类型</span>
-        @Html.Bootstrap().Select("ProductType", null, dic)
+        @Html.Bootstrap().Select("ProductType", null, dicProductType)
     </div>
     <br />
 
