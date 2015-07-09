@@ -9,11 +9,11 @@
 <div class="container">
     <h2>添加产品</h2>
 
-    @{Html.BeginForm("Add", "Product");}
+    @{Html.BeginForm("Add", "Product", FormMethod.Post, new { name = "cars" });}
 
     <div class="input-group input-group-lg col-lg-10">
-        <span class="input-group-addon" id="sizing-addon1">产品名称</span>
-        <input type="text" class="form-control" name="ProductName" aria-describedby="sizing-addon1">
+        <span class="input-group-addon">产品名称</span>
+        <input type="text" class="form-control" name="ProductName">
 
         <span class="input-group-addon">刹车片类型</span>
         @Html.Bootstrap().Select("ProductType", null, dicProductType)
@@ -21,23 +21,112 @@
 
     <br />
     <div class="input-group input-group-lg col-lg-10">
-        <span class="input-group-addon" id="sizing-addon1">适合车型</span>
-        <input type="text" class="form-control" name="SuitCar" aria-describedby="sizing-addon1">
+        <span class="input-group-addon">适合车型</span>
+        <select onchange="sendmodels(document.cars.brands.options[document.cars.brands.selectedIndex].value);" class="form-control" name="brands">
+            <option selected="" value="">请选择爱车品牌</option>
+            <option value="21">A 奥迪</option>
+            <option value="104">B 巴博斯</option>
+            <option selected="" value="103">B 奔驰AMG</option>
+            <option value="69">B 本田</option>
+            <option value="42">B 别克</option>
+            <option value="48">B 奔驰</option>
+            <option value="23">B 宝马</option>
+            <option value="49">B 保时捷</option>
+            <option value="51">B 标致</option>
+            <option value="58">B 比亚迪</option>
+            <option value="62">C 长城</option>
+            <option value="32">C 长安</option>
+            <option value="108">D 东风裕隆纳智捷</option>
+            <option value="83">D 东南</option>
+            <option value="44">D 道奇</option>
+            <option value="46">D 大众</option>
+            <option value="89">D 东风风行</option>
+            <option value="90">D 东风风神</option>
+            <option value="65">F 丰田</option>
+            <option value="39">F 福特</option>
+            <option value="52">F 菲亚特</option>
+            <option value="95">F 福田</option>
+            <option value="106">G GMC</option>
+            <option value="96">G 广汽传祺</option>
+            <option value="37">G 广汽长丰</option>
+            <option value="100">H 华晨中华</option>
+            <option value="66">H 海马</option>
+            <option value="84">H 华泰</option>
+            <option value="85">H 悍马</option>
+            <option value="98">H 汇众</option>
+            <option value="57">H 哈飞</option>
+            <option value="88">H 华晨金杯</option>
+            <option value="18">J 吉普</option>
+            <option value="24">J 捷豹</option>
+            <option value="54">J 江淮</option>
+            <option value="33">J 吉利</option>
+            <option value="55">J 吉利帝豪</option>
+            <option value="34">J 吉利全球鹰</option>
+            <option value="56">J 吉利英伦</option>
+            <option value="36">J 江铃汽车</option>
+            <option value="17">K 凯迪拉克</option>
+            <option value="43">K 克莱斯勒</option>
+            <option value="107">L 林肯</option>
+            <option value="67">L 雷克萨斯</option>
+            <option value="15">L 铃木</option>
+            <option value="20">L 路虎</option>
+            <option value="29">L 雷诺</option>
+            <option value="61">L 莲花</option>
+            <option value="91">L 理念</option>
+            <option value="94">L 陆风</option>
+            <option value="97">L 罗孚</option>
+            <option value="63">L 力帆</option>
+            <option value="70">M 马自达</option>
+            <option value="19">M 名爵</option>
+            <option value="60">M 迷你</option>
+            <option value="13">O 讴歌</option>
+            <option value="28">O 欧宝</option>
+            <option value="109">Q 启辰</option>
+            <option value="16">Q 起亚</option>
+            <option value="30">Q 奇瑞</option>
+            <option value="38">Q 奇瑞瑞麒</option>
+            <option value="31">Q 奇瑞威麟</option>
+            <option value="68">R 日产</option>
+            <option value="45">R 荣威</option>
+            <option value="110">S 双龙</option>
+            <option value="14">S 三菱</option>
+            <option value="40">S 斯巴鲁</option>
+            <option value="22">S 斯柯达</option>
+            <option value="86">S Smart</option>
+            <option value="53">S 萨博</option>
+            <option value="87">S 上汽通用五菱</option>
+            <option value="47">W 沃尔沃</option>
+            <option value="111">X 西亚特</option>
+            <option value="41">X 现代</option>
+            <option value="59">X 雪佛兰</option>
+            <option value="27">X 雪铁龙</option>
+            <option value="99">Y 一汽奔腾</option>
+            <option value="12">Y 英菲尼迪</option>
+            <option value="92">Y 一汽吉林</option>
+            <option value="93">Y 一汽红旗</option>
+            <option value="35">Y 一汽夏利</option>
+
+        </select>
+        <input type="hidden" name="SuitCar" value="">
 
         <span class="input-group-addon">型号</span>
-        @Html.TextBox("CarXingHao", null, new { @class = "form-control" })
+        <select id="the_models" name="models" class="form-control"></select>
+        <input type="hidden" name="CarXingHao" value="">
 
         <span class="input-group-addon">排量</span>
-        @Html.TextBox("PaiLiang", null, new { @class = "form-control", type = "number", step = "0.1" })
+        <select id="the_outputs" name="outputs" class="form-control"></select>
+        <input type="hidden" name="PaiLiang" value="">
 
         <span class="input-group-addon">出厂年份</span>
-        @Html.TextBox("FactoryYear", null, new { @class = "form-control", type = "number" })
+        <select id="the_years" name="years" class="form-control"></select>
+        <input type="hidden" name="FactoryYear" value="">
+        
     </div>
     <br />
 
     <div class="input-group input-group-lg col-lg-10">
-        <span class="input-group-addon" id="sizing-addon1">产品价格(元)</span>
-        <input type="number" class="form-control" name="DisplayPrice" aria-describedby="sizing-addon1">
+        <span class="input-group-addon">产品价格(元)</span>
+        <input type="number" class="form-control" name="DisplayPrice">
 
         <span class="input-group-addon">库存</span>
         @Html.TextBox("Stock", null, new { @class = "form-control", type = "number" })
@@ -47,25 +136,53 @@
     <span class="h4">产品详情</span>
     @Html.TextArea("content", new { style = "width:900px;height:500px" })
     <br />
-    <input type="submit" value="提交" class="btn btn-primary"/>
+    <input type="submit" value="提交" class="btn btn-primary" />
 
     @{Html.EndForm();}
 
 </div>
 
 @section js{
-<script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
-<script type="text/javascript">
-            var editor;
-            KindEditor.ready(function (K) {
-                editor = K.create('textarea[name="content"]', {
-                    resizeType: 1,
-                    allowFileManager : true,
-                    uploadJson: '@Url.Content("~/Kindeditor/Upload.ashx")',
-                    fileManagerJson:'@Url.Content("~/Kindeditor/FileManager.ashx")'
+    <script type="text/javascript" src="@Url.Content("~/Kindeditor/kindeditor-min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Kindeditor/lang/zh_CN.js")"></script>
+    <script type="text/javascript">
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                resizeType: 1,
+                allowFileManager: true,
+                uploadJson: '@Url.Content("~/Kindeditor/Upload.ashx")',
+                fileManagerJson: '@Url.Content("~/Kindeditor/FileManager.ashx")'
 
-                });
             });
-</script>
+        });
+
+        function createRequestObject() {
+            var ro;
+            var browser = navigator.appName;
+            if (browser == "Microsoft Internet Explorer") {
+                ro = new ActiveXObject("Microsoft.XMLHTTP");
+            } else {
+                ro = new XMLHttpRequest();
+            }
+            return ro;
+        }
+
+        var http = createRequestObject();
+
+        function sendmodels(bid) {
+            http.open('get', '/Product/getmodel/' + bid);
+            http.onreadystatechange = getmodels;
+            http.send(null);
+        }
+
+        function getmodels() {
+            if (http.readyState == 4) {
+                var response = http.responseText;
+                $('#the_models').html('<select name="models" id="the_models" onblur="check_all(\'the_models\')" class="rideselect" onChange="sendoutputs(document.cars.models.options[document.cars.models.selectedIndex].value);"><option value="" selected>请选择型号</option>' + response + '</select>');
+                //getObject("caroutputs").innerHTML = '<select name="outputs" id="the_outputs" onblur="check_all(\'the_outputs\')" class="rideselect" disabled><option value="" selected>请选择排量</option></select>';
+                //getObject("caryears").innerHTML = '<select name="years" id="the_years" onblur="check_all(\'the_years\')" class="rideselect" disabled><option value="" selected>请选择出厂年份</option></select>';
+            }
+        }
+    </script>
 }

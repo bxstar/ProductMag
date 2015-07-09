@@ -1,21 +1,21 @@
 ﻿@{
     @model IEnumerable<MyFluentBootstrap.Models.Product>
-    ViewBag.Title="产品查询";
+    ViewBag.Title = "产品查询";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     Dictionary<string, string> dicProductType = new Dictionary<string, string>();
     dicProductType.Add("前刹车片", "前刹车片");
     dicProductType.Add("后刹车片", "后刹车片");
-    dicProductType.Add("刹车片筛选", "");
+    dicProductType.Add("产品筛选", "");
 }
 
 <div class="container" style="padding-left:0px;">
     <form class="form-horizontal" role="form" name="searchform" action="@Url.Action("ListForMobile", new { index = "1" })" method="post">
         <div class="form-group">
-            <div class="col-xs-5" style="padding-right:0px;">
+            <div class="col-xs-4" style="padding-right:0px;">
                 @Html.Bootstrap().Select("ProductType", null, dicProductType)
             </div>
-            <div class="col-xs-3" style="padding:0px;">
+            <div class="col-xs-4" style="padding:0px;">
                 <select name="SuitCar" class="form-control">
                     <option selected="" value="">品牌筛选</option>
                     <option value="奥迪">A 奥迪</option>

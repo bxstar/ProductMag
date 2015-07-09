@@ -115,6 +115,13 @@ namespace MyFluentBootstrap.Controllers
             Product p = Product.FindByProductID(id);
             return View(p);
         }
+
+        public ActionResult DetailForMobile(int id)
+        {
+            Product p = Product.FindByProductID(id);
+            return View(p);
+        }
+
         public ActionResult Edit(int id)
         {
             Product p = Product.FindByProductID(id);
@@ -152,6 +159,11 @@ namespace MyFluentBootstrap.Controllers
                 return "编辑成功";
             else
                 return "编辑失败";
+        }
+
+        public string getmodel(int id)
+        {
+            return "<option value=\"404\">206</option><option value=\"405\">206 CC</option><option value=\"408\">207 CC</option><option value=\"406\">207(两厢)</option><option value=\"407\">207(三厢)</option><option value=\"415\">3008</option><option value=\"412\">307 CC</option><option value=\"411\">307 SW</option><option value=\"410\">307(两厢/国产)</option><option value=\"409\">307(两厢/进口)</option><option value=\"1042\">307(三厢)</option><option value=\"1081\">308</option><option value=\"414\">308 CC</option><option value=\"413\">308 SW</option><option value=\"1181\">4008</option><option value=\"416\">407</option><option value=\"418\">407 Coupe</option><option value=\"417\">407SW</option><option value=\"419\">408</option><option value=\"1180\">508</option><option value=\"420\">607</option><option value=\"1182\">RCZ</option>";
         }
     }
 }
