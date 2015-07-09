@@ -43,7 +43,7 @@ namespace MyFluentBootstrap.Models
         /// </summary>
         public virtual int PageSize
         {
-            get { return 20; }
+            get { return 2; }
         }
 
         /// <summary>

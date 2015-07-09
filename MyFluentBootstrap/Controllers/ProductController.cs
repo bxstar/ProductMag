@@ -57,6 +57,35 @@ namespace MyFluentBootstrap.Controllers
         }
 
         /// <summary>
+        /// 提供给手机端查询
+        /// </summary>
+        public ActionResult ListForMobile(string SuitCar, string ProductName, string index)
+        {
+            if (string.IsNullOrEmpty(index))
+                index = "1";
+            Dictionary<string, object> dicSearchCondition = new Dictionary<string, object>();
+            if (!string.IsNullOrEmpty(SuitCar))
+            {
+                dicSearchCondition.Add("SuitCar", SuitCar);
+            }
+            if (ProductName == null)
+            {
+                ProductName = string.Empty;
+            }
+            List<Product> lstProduct = Product.FindAll(dicSearchCondition.Select(o => o.Key).ToArray(), dicSearchCondition.Select(o => o.Value).ToArray()).Where<Product>(x => x.ProductName.Contains(ProductName)).ToList();
+                //.ToList().Where(x => x.ProductName.Contains(ProductName)).ToList();
+
+
+            BasePageModel page = new BasePageModel("List") { SearchKeyWord = ProductName, CurrentIndex = Int32.Parse(index), TotalCount = lstProduct.Count };
+
+            List<Product> pageList = lstProduct.Skip((page.CurrentIndex - 1) * page.PageSize).Take(page.PageSize).ToList();
+            ViewData["pagemodel"] = page;
+            ViewBag.SuitCar = SuitCar;
+            ViewBag.ProductName = ProductName;
+            return View(pageList);
+        }
+
+        /// <summary>
         /// 提供OData数据服务，参考：http://volaresystems.com/blog/post/2013/02/19/Using-Kendo-UI-grid-with-Web-API-and-OData
         /// </summary>
         public ActionResult MobileList(string searchKey)

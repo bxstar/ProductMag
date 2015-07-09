@@ -461,6 +461,7 @@
     <Content Include="Views\Product\Edit.cshtml" />
     <Content Include="Views\Shared\MvcPagerView.cshtml" />
     <Content Include="Views\Product\MobileList.cshtml" />
+    <Content Include="Views\Product\ListForMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
